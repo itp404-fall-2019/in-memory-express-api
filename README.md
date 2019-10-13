@@ -1,0 +1,5 @@
+To start:
+
+```
+pm2 start app.js --watch
+```
