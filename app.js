@@ -14,6 +14,11 @@ const db = {
       id: 1,
       title: 'Post 1',
       body: 'something here...'
+    },
+    {
+      id: 2,
+      title: 'Post 2',
+      body: 'something else here...'
     }
   ]
 };
@@ -23,7 +28,6 @@ app.get('/api/posts', (request, response) => {
 });
 
 app.post('/api/posts', (request, response) => {
-  // add some validation here
   const post = request.body;
   post.id = db.posts.length;
   db.posts.push(post);
@@ -31,8 +35,9 @@ app.post('/api/posts', (request, response) => {
 });
 
 app.get('/api/posts/:id', (request, response) => {
+  const id = Number(request.params.id);
   const post = db.posts.find((post) => {
-    return post.id === Number(request.params.id);
+    return post.id === id;
   });
 
   if (post) {
@@ -43,13 +48,14 @@ app.get('/api/posts/:id', (request, response) => {
 });
 
 app.delete('/api/posts/:id', (request, response) => {
+  const id = Number(request.params.id);
   const post = db.posts.find((post) => {
-    return post.id === Number(request.params.id);
+    return post.id === id;
   });
 
   if (post) {
     db.posts = db.posts.filter((post) => {
-      return post.id !== Number(request.params.id);
+      return post.id !== id;
     });
     response.status(204).send();
   } else {
@@ -58,8 +64,9 @@ app.delete('/api/posts/:id', (request, response) => {
 });
 
 app.put('/api/posts/:id', (request, response) => {
+  const id = Number(request.params.id);
   const post = db.posts.find((post) => {
-    return post.id === Number(request.params.id);
+    return post.id === id;
   });
 
   if (post) {
