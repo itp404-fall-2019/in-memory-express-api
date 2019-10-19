@@ -1,7 +1,12 @@
 const express = require('express');
 const app = express();
+const cors = require('cors')
 
 app.use(express.json());
+app.use(cors({
+  // origin: 'https://www.google.com'
+  // origin: 'http://localhost:3000'
+}));
 
 const db = {
   posts: [
@@ -23,8 +28,8 @@ app.get('/api/posts', (request, response) => {
 });
 
 app.post('/api/posts', (request, response) => {
-  const post = request.body;
-  post.id = db.posts.length;
+  const post = request.body;  
+  post.id = db.posts.length + 1;
   db.posts.push(post);
   response.json(post);
 });
@@ -72,4 +77,4 @@ app.put('/api/posts/:id', (request, response) => {
   }
 });
 
-app.listen(8000);
+app.listen(process.env.PORT || 8000);
