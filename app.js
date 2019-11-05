@@ -1,12 +1,7 @@
 const express = require('express');
 const app = express();
-const cors = require('cors')
 
 app.use(express.json());
-app.use(cors({
-  // origin: 'https://www.google.com'
-  // origin: 'http://localhost:3000'
-}));
 
 const db = {
   posts: [
@@ -77,4 +72,4 @@ app.put('/api/posts/:id', (request, response) => {
   }
 });
 
-app.listen(process.env.PORT || 8000);
+app.listen(8000);
