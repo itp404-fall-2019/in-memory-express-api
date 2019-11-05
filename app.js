@@ -1,7 +1,14 @@
 const express = require('express');
 const app = express();
+const cors = require('cors')
+
+const { ENVIRONMENT } = process.env;
 
 app.use(express.json());
+app.use(cors({
+  // origin: 'https://www.google.com'
+  origin: ENVIRONMENT === 'development' ? 'http://localhost:3000' : 'https://davids-client-app.surge.sh'
+}));
 
 const db = {
   posts: [
