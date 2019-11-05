@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors')
 
-const { ENVIRONMENT } = process.env;
+const { ENVIRONMENT, PORT } = process.env;
 
 app.use(express.json());
 app.use(cors({
@@ -79,4 +79,4 @@ app.put('/api/posts/:id', (request, response) => {
   }
 });
 
-app.listen(8000);
+app.listen(PORT || 8000);
